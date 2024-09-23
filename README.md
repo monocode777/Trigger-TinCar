@@ -52,5 +52,43 @@ Al registrarse un nuevo arrendamoento  en la tabla "Arrendammientos", se actuali
       VALUES (1, 1001, '2024-09-22', '2024-09-30');
       
 ![image](https://github.com/user-attachments/assets/be0b387b-4c9a-417c-a175-d09cae1e3d47)
+![image](https://github.com/user-attachments/assets/a068fe4b-c340-416d-b282-3db6b669590b)
+
+Este trigger actualizará la tabla Parqueaderos en la columna disponible para el parqueadero con id = 1, lo que indica que ya no está disponible para otros conductores.
+
+ahora utilizamos un Trigger para actualizar disponibilidad cuando finalice el arrendamiento. Este trigger actualizará el estado del parqueadero a true cuando la fecha de fin del arrendamiento sea alcanzada.
+
+                  DELIMITER //
+                  
+                  CREATE TRIGGER actualizar_disponibilidad_al_finalizar
+                  AFTER UPDATE ON Arrendamientos
+                  FOR EACH ROW
+                  BEGIN
+                      IF NEW.fecha_fin < CURDATE() THEN
+                          UPDATE Parqueaderos
+                          SET disponible = true
+                          WHERE id = NEW.id_parqueadero;
+                      END IF;
+                  END //
+                  
+                  DELIMITER ;
+
+Si el fecha_fin es anterior a la fecha actual, el trigger activará la actualización de la disponibilidad del parqueadero correspondiente.
+
+
+            UPDATE Arrendamientos
+            SET fecha_fin = '2024-09-20'
+            WHERE id_arrendamiento = 2;
+
+![image](https://github.com/user-attachments/assets/ddf4577a-c2b9-4934-b923-85b2620fb2ea)
+![image](https://github.com/user-attachments/assets/68b878e5-d907-4ede-8995-be1faa2a6eb2)
+
+
+
+
+
+
+
+
 
       
