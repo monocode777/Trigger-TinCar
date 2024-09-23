@@ -50,5 +50,7 @@ Al registrarse un nuevo arrendamoento  en la tabla "Arrendammientos", se actuali
 
       INSERT INTO Arrendamientos (id_parqueadero, id_conductor, fecha_inicio, fecha_fin)
       VALUES (1, 1001, '2024-09-22', '2024-09-30');
+      
+![image](https://github.com/user-attachments/assets/be0b387b-4c9a-417c-a175-d09cae1e3d47)
 
       
